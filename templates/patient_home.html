@@ -1,0 +1,50 @@
+{% extends '_base.html' %}
+
+{% block header %}
+
+<title>
+    Patition</title>
+
+{% endblock %}
+
+{% block title %}
+Patition home page
+{% endblock %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form class="layui-form" method="post" action="patient_home">
+            {% csrf_token %}
+            <label class="control-label" for="">Choose your condition:</label>
+            <div class="layui-btn-container">
+                {% for condition in conditions %}
+                    <input type="checkbox" name="condition" value="{{ condition.name }}" title="{{ condition.name }}" >
+                {% endfor %}
+            </div>
+            <div class="layui-row" style="padding-top: 50px">
+                <label>Condition Description</label>
+                <textarea name="description" required lay-verify="required" placeholder="Please describe your condition" class="layui-textarea"></textarea>
+            </div>
+
+            <div class="control-group text-right">
+                <input class="layui-btn" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    layui.use('form', function () {
+        var form = layui.form;
+    });
+</script>
+{% endblock %}
